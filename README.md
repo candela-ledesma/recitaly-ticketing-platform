@@ -103,6 +103,25 @@ npm run dev
 
 ---
 
+## 🖼️ Screenshots
+
+### Bienvenidos
+
+Welcome page
+![Home](./docs/home.png)
+
+### Detalle del recital
+
+Información completa + playlist
+![Detail](./docs/detail.png)
+
+### Carrito de compras
+
+Shopping cart
+![Cart](./docs/cart.png)
+
+---
+
 ## 📌 Variables de entorno
 
 Ejemplo:
