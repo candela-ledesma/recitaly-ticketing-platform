@@ -39,6 +39,10 @@ next-env.d.ts
 /migrations
 /prisma/migrations
 
+# Generated Prisma client/runtime
+/app/generated/
+/app/generated/prisma/
+
 # editor / ide
 .vscode/
 .idea/

@@ -29,5 +29,9 @@ build/
 /nextjs-dashboard/migrations/
 /nextjs-dashboard/prisma/migrations/
 
+# Prisma generated client (don't commit generated runtime files)
+/nextjs-dashboard/app/generated/
+/nextjs-dashboard/app/generated/prisma/
+
 # Vercel
 .vercel/
