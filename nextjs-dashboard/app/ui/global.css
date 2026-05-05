@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Cambia el color de las flechas Swiper a rosa clarito */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #f9a8d4 !important; /* Tailwind pink-200 */
+}
+
+/* Cambia el color de los dots inactivos */
+.swiper-pagination-bullet {
+  background-color: #f9a8d4 !important; /* Tailwind pink-200 */
+}
+
+/* Cambia el color del dot activo */
+.swiper-pagination-bullet-active {
+  background-color: #d172a6 !important; /* Tailwind pink-500 */
+}
+
+

@@ -1,0 +1,119 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../nextjs-dashboard/app/generated/prisma"
+}
+
+model PushSubscription {
+  id         Int      @id @default(autoincrement())
+  endpoint   String   @unique
+  keys       Json
+  createdAt  DateTime @default(now())
+}
+
+enum RecitalStatus {
+  ACTIVE
+  INACTIVE
+}
+
+
+model Recital {
+  id        Int      @id @default(autoincrement())
+  tmId      String   @unique
+  name      String
+  artistId  Int
+  artist    Artist   @relation(fields: [artistId], references: [id])
+  date      DateTime
+  price     Float
+  info      String?
+  venueId   Int
+  venue     Venue    @relation(fields: [venueId], references: [id])
+  status    RecitalStatus @default(ACTIVE)
+  images    Image[]  // Relation to Image
+  carts     Cart[]
+  bookings  Booking[]
+}
+
+model Venue {
+  id        Int      @id @default(autoincrement())
+  tmId      String   @unique
+  name      String
+  type      String
+  locate    String?
+  location  String?
+  url       String?
+  address   String?
+  city      String?
+  country   String?
+
+  images    Image[]  // Relation to Image
+  recitals  Recital[]
+}
+
+model Artist {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  images    Image[]  // Relation to Image
+  recitals  Recital[]
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  url       String
+  ratio     String?
+  height    Int?
+  width     Int?
+  fallback  Boolean?
+  // Relations
+  recitalId Int?
+  recital   Recital? @relation(fields: [recitalId], references: [id])
+  venueId   Int?
+  venue     Venue?   @relation(fields: [venueId], references: [id])
+  artistId  Int?
+  artist    Artist?  @relation(fields: [artistId], references: [id])
+}
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  password  String
+  email    String  @unique
+  role      Role     @default(ADMIN)
+  adress    String?
+  phoneNumber Int?
+  carts     Cart[]
+  bookings  Booking[]
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+// Join table for Cart (User <-> Recital)
+model Cart {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  recitalId Int
+  recital   Recital  @relation(fields: [recitalId], references: [id])
+  amount    Int
+
+  @@unique([userId, recitalId])
+}
+
+// Join table for Booking (User <-> Recital)
+model Booking {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  recitalId Int
+  recital   Recital  @relation(fields: [recitalId], references: [id])
+  amount    Int
+  date      DateTime
+
+  @@unique([userId, recitalId])
+}
