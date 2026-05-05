@@ -85,24 +85,6 @@ Aplicación web full-stack para la exploración y compra de entradas a recitales
 
 ---
 
-## 🖼️ Screenshots
-
-### inicio
-
-Inicio
-![Home](./docs/home.png)
-
-### Detalle del recital
-
-Información completa + playlist
-![Detail](./docs/detail.png)
-
-### Carrito de compras
-
-Carrito 
-![Cart](./docs/cart.png)
-
----
 
 ## ⚙️ Instalación local
 
@@ -126,17 +108,14 @@ npm run dev
 
 ### Bienvenidos
 
-Welcome page
 ![Home](./docs/home.png)
 
 ### Detalle del recital
 
-Información completa + playlist
 ![Detail](./docs/detail.png)
 
 ### Carrito de compras
 
-Shopping cart
 ![Cart](./docs/cart.png)
 
 ---
