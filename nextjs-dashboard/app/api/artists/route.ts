@@ -14,10 +14,8 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(artists.map(a => a.name));
   } catch (error) {
-    console.error('[GET /api/artists]', error);
-    return NextResponse.json(
-      { error: 'db_error', details: String(error) },
-      { status: 500 },
-    );
+    console.error('[GET /api/artists] DB error', error);
+    // Return an empty array on error to keep clients resilient
+    return NextResponse.json([], { status: 200 });
   } 
 }

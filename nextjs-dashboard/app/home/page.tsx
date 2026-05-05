@@ -32,13 +32,23 @@ export default function Page() {
       fetchRecitals( { artist, dateFrom, dateTo, page });
 
       if (artistsNames.length == 0) {
-        const res2 = await fetch('/api/artists');
-        if (!res2.ok) throw new Error(`HTTP ${res2.status}`);
-        const artists = await res2.json();
-        if (Array.isArray(artists)) {
-          setArtistsNames(artists);
-        } else {
-          throw new Error('Artists response is not an array');
+        try {
+          const res2 = await fetch('/api/artists');
+          if (res2.ok) {
+            const artists = await res2.json();
+            if (Array.isArray(artists)) {
+              setArtistsNames(artists);
+            } else {
+              console.warn('Unexpected /api/artists payload, expected array');
+              setArtistsNames([]);
+            }
+          } else {
+            console.warn('/api/artists returned', res2.status);
+            setArtistsNames([]);
+          }
+        } catch (e) {
+          console.error('Failed to fetch artists', e);
+          setArtistsNames([]);
         }
       }
 
