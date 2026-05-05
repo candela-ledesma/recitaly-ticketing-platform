@@ -18,9 +18,21 @@ export default function HomePage() {
   const [recitals, setRecitals] = useState<Recital[]>([]);
 
   useEffect(() => {
-    fetch(`/api/recitals?limit=30&skip=0`) 
-      .then((res) => res.json())
-      .then((data) => setRecitals(data));
+    (async () => {
+      try {
+        const res = await fetch(`/api/recitals?limit=30&skip=0`);
+        if (!res.ok) {
+          console.error('Failed to load recitals, status', res.status);
+          setRecitals([]);
+          return;
+        }
+        const data = await res.json();
+        setRecitals(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error('Failed to fetch recitals', err);
+        setRecitals([]);
+      }
+    })();
   }, []);
 
 
