@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "SeatType" ALTER COLUMN "type" DROP DEFAULT;
